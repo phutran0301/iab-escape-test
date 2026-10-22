@@ -2,7 +2,7 @@
 .p.down,.p:active{transform:translateY(5px) scale(.97);box-shadow:0 1px 0 #a3134f,inset 0 4px 10px rgba(0,0,0,.35)}
 #toast{position:fixed;left:50%;bottom:40px;transform:translateX(-50%);background:#fff;color:#111;padding:12px 18px;border-radius:12px;font-weight:600;opacity:0;transition:opacity .25s;pointer-events:none;max-width:85%}
 #toast.on{opacity:1}</style></head><body>
-<p style="opacity:.6">v18 · bước 1</p><h2>Chuyển 120.000đ</h2>
+<p style="opacity:.6">v19 · bước 1</p><h2>Chuyển 120.000đ</h2>
 <p>Nhấn giữ nút bên dưới, chọn <b>“Mở liên kết”</b> để được chuyển sang CAKE</p>
 <a class="p" href='https://phutran0301.github.io/iab-escape-test/go.html?v=18'><img src="cake-logo.png">Tiếp tục</a>
 <a class="s" href='https://phutran0301.github.io/iab-escape-test/go.html?v=18&tap=1'>(So sánh: bấm thường)</a>
@@ -12,5 +12,5 @@ var b=document.querySelector('a.p'),T=document.getElementById('toast'),tm;
 function toast(m){T.textContent=m;T.classList.add('on');clearTimeout(tm);tm=setTimeout(function(){T.classList.remove('on')},2500);}
 b.addEventListener('touchstart',function(){b.classList.add('down')},{passive:true});
 ['touchend','touchcancel'].forEach(function(e){b.addEventListener(e,function(){b.classList.remove('down')})});
-b.addEventListener('click',function(e){e.preventDefault();});
+b.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();if(IAB)toast('Bạn không bấm được, hãy nhấn giữ nút');},true);
 </script></body></html>
