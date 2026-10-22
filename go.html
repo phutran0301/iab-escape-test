@@ -2,6 +2,8 @@
 <style>body{font-family:-apple-system,sans-serif;background:#0f172a;color:#e2e8f0;padding:24px;text-align:center;margin-top:40px}a.p{display:flex;align-items:center;justify-content:center;gap:10px;background:#e91e78;color:#fff;padding:18px;border-radius:40px;font-size:19px;font-weight:700;text-decoration:none;margin:24px 0}img{width:28px;border-radius:7px}</style></head><body>
 <h2>Thanh toán 120.000đ</h2>
 <a class="p" href='cake.vn://applink?targetPage=QRPay&source=App&qrContent=00020101021238630010A000000727013300069710250119PSS26259131000000070208QRIBFTTA530370454061200005802VN62230819MCRSskfyB%20com%20chien630446A8&callbackurl=ngo://start'><img src="cake-logo.png">Bấm vào đây để thanh toán qua Cake</a>
-<p id="cd" style="opacity:.8">Tự chuyển sang Cake sau 3s</p>
-<script>var n=3,S=document.querySelector("a.p").getAttribute("href"),c=document.getElementById("cd");var t=setInterval(function(){n--;if(n>0){c.textContent="Tự chuyển sang Cake sau "+n+"s";}else{clearInterval(t);c.textContent="Đang chuyển sang Cake…";location.href=S;}},1000);</script>
+<p id="cd" style="opacity:.8"></p>
+<script>var S=document.querySelector("a.p").getAttribute("href"),c=document.getElementById("cd"),IAB=/MessengerForiOS|Orca-Android|FBAN|FBAV|FBIOS|FB_IAB|FB4A/i.test(navigator.userAgent),go=false;
+function start(){if(go||IAB||document.hidden||!document.hasFocus())return;go=true;var n=3;c.textContent="Tự chuyển sang Cake sau 3s";var t=setInterval(function(){n--;if(n>0){c.textContent="Tự chuyển sang Cake sau "+n+"s";}else{clearInterval(t);c.textContent="Đang chuyển sang Cake…";location.href=S;}},1000);}
+window.addEventListener("focus",start);window.addEventListener("pageshow",start);document.addEventListener("visibilitychange",start);document.addEventListener("touchstart",start,{passive:true});setTimeout(start,300);</script>
 </body></html>
