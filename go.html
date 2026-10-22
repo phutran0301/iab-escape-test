@@ -1,6 +1,6 @@
 <!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Đang mở CAKE</title><style>body{font-family:-apple-system,sans-serif;background:#0f172a;color:#e2e8f0;padding:24px;text-align:center}a.p{display:flex;align-items:center;justify-content:center;gap:10px;background:#e91e78;color:#fff;padding:18px;border-radius:40px;font-size:20px;font-weight:700;text-decoration:none;margin:20px 0}a.s{color:#93c5fd;display:block;margin:12px}img{width:28px;border-radius:7px}pre{text-align:left;font-size:11px;background:#1e293b;padding:10px;white-space:pre-wrap;word-break:break-all}</style></head><body>
-<p style="opacity:.6">v15 · bước 2</p><h2 id="st">👆 Thả tay ra và chọn “Mở liên kết”</h2><p id="sub">để chuyển đến trang chuyển tiền CAKE</p>
-<a class="p" href='cake.vn://applink?targetPage=QRPay&source=App&qrContent=00020101021238630010A000000727013300069710250119PSS26259131000000070208QRIBFTTA530370454061200005802VN62230819MCRSskfyB%20com%20chien630446A8&callbackurl=ngo://start'><img src="cake-logo.png">Chuyển 120.000đ</a>
+<p style="opacity:.6">v16 · bước 2</p><h2 id="st">Thanh toán 120.000đ</h2><p id="sub"></p>
+<a class="p" href='cake.vn://applink?targetPage=QRPay&source=App&qrContent=00020101021238630010A000000727013300069710250119PSS26259131000000070208QRIBFTTA530370454061200005802VN62230819MCRSskfyB%20com%20chien630446A8&callbackurl=ngo://start'><img src="cake-logo.png">Bấm vào đây để thanh toán qua Cake</a>
 <a class="s" href='cake.vn://'>Mở CAKE (trần)</a>
 <pre id="d"></pre>
 <script>
@@ -9,6 +9,6 @@ function log(m){document.getElementById('d').textContent+=((Date.now()-t0)+'ms '
 log('UA: '+navigator.userAgent);log('ref: '+document.referrer);log('hist: '+history.length+' q: '+location.search);
 document.addEventListener('visibilitychange',function(){if(document.hidden){hid=true;log('hidden → app mở?');}});
 window.addEventListener('pagehide',function(){hid=true;});
-setTimeout(function(){document.getElementById('st').textContent='Đang mở CAKE…';document.getElementById('sub').textContent='';log('gọi full scheme');location.href=S;},600);
-setTimeout(function(){if(!hid&&!document.hidden){log('vẫn hiện → gọi cake.vn:// trần');document.getElementById('st').textContent='Thử mở CAKE trần…';location.href='cake.vn://';}},1500);
+document.querySelector('a.p').addEventListener('click',function(e){e.preventDefault();log('tap → gọi full scheme');document.getElementById('st').textContent='Đang mở CAKE…';hid=false;location.href=S;
+setTimeout(function(){if(!hid&&!document.hidden){log('vẫn hiện → gọi cake.vn:// trần');document.getElementById('st').textContent='Thử mở CAKE trần…';location.href='cake.vn://';}},1500);});
 </script></body></html>
