@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Test mở trình duyệt v11</title>
-<meta property="og:title" content="Test mở trình duyệt v11" />
+<title>Test mở trình duyệt v12</title>
+<meta property="og:title" content="Test mở trình duyệt v12" />
 <meta property="og:description" content="Thử từng cách mở trang trong trình duyệt ngoài." />
 <style>
 *{box-sizing:border-box}
@@ -63,7 +63,9 @@ li{background:#1e293b;border:1px solid #334155;border-radius:12px;padding:10px;m
 </div>
 <div class="card">
 <h1>Test mở trình duyệt ngoài</h1>
-<span class="ver">v11</span>
+<span class="ver">v12</span>
+<div class="pill-cake" style="margin:10px 0"><a href='./open.html'>55. Trang trung gian kiểu VietQR</a></div>
+<div class="code">open.html (không auto): bấm nút hồng → QRPay, sau 1.5s nếu chưa rời trang → cake.vn://</div>
 <div class="card" id="v11"><h2>v11 qua Safari → trang trung gian</h2>
 <div style="margin-top:10px"><button class="btn" onclick="document.getElementById('s49').textContent='clicked #49 '+new Date().toLocaleTimeString();window.open('x-safari-https://phutran0301.github.io/iab-escape-test/open.html?auto=1','_blank')">49. window.open x-safari- (_blank)</button></div>
 <div class="code">window.open('x-safari-…open.html?auto=1','_blank') — mở Safari, trang trung gian tự hỏi 'Open in CAKE?'</div>
@@ -311,7 +313,7 @@ b29.addEventListener("click",function(){
   } else fallback();
   function fallback(){var ta=document.createElement("textarea");ta.value=url;document.body.appendChild(ta);ta.select();var ok=false;try{ok=document.execCommand("copy")}catch(e){}document.body.removeChild(ta);done(ok);}
 });
-document.getElementById("debug").innerHTML="<b>Version:</b> v11\n<b>User agent:</b> "+esc(ua)+"\n<b>Platform:</b> "+esc(navigator.platform||"")+"\n<b>In-app:</b> "+(inApp?"yes":"no")+"\n<b>URL:</b> "+esc(location.href)+"\n<b>Self link (#27):</b> "+esc(selfUrl);
+document.getElementById("debug").innerHTML="<b>Version:</b> v12\n<b>User agent:</b> "+esc(ua)+"\n<b>Platform:</b> "+esc(navigator.platform||"")+"\n<b>In-app:</b> "+(inApp?"yes":"no")+"\n<b>URL:</b> "+esc(location.href)+"\n<b>Self link (#27):</b> "+esc(selfUrl);
 })();
 </script>
 </body>
