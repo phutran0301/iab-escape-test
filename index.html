@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Test mở trình duyệt v7</title>
-<meta property="og:title" content="Test mở trình duyệt v7" />
+<title>Test mở trình duyệt v8</title>
+<meta property="og:title" content="Test mở trình duyệt v8" />
 <meta property="og:description" content="Thử từng cách mở trang trong trình duyệt ngoài." />
 <style>
 *{box-sizing:border-box}
@@ -28,9 +28,16 @@ li{background:#1e293b;border:1px solid #334155;border-radius:12px;padding:10px;m
 .btn-sec{background:#334155;color:#e2e8f0;font-size:1rem;font-weight:600;padding:14px}
 #toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%);background:#22c55e;color:#04210f;font-weight:700;padding:12px 18px;border-radius:999px;font-size:.9rem;box-shadow:0 8px 24px rgba(0,0,0,.4);opacity:0;pointer-events:none;transition:opacity .2s;z-index:99;max-width:90%;text-align:center}
 #toast.show{opacity:1}
+.pill-cake{display:inline-flex;align-items:center;gap:10px;width:100%;justify-content:center;padding:14px 22px;border-radius:999px;background:#ec1e79;color:#fff;text-decoration:none;font-weight:800;font-size:1.05rem;border:none;cursor:pointer;box-shadow:0 6px 18px rgba(236,30,121,.4)}
+.pill-cake img{width:24px;height:24px;border-radius:7px;flex:none}
 </style>
 </head>
 <body>
+<div class="card" style="margin-bottom:16px">
+<h2 style="font-size:1.15rem;margin:0 0 4px">Cake QRPay deeplink</h2>
+<p style="color:#94a3b8;font-size:.8rem;margin:0 0 8px">Scheme đầy đủ cake.vn://applink?targetPage=QRPay… (từ RE).</p>
+<ol id="list8"></ol>
+</div>
 <div class="card" style="margin-bottom:16px">
 <h2 style="font-size:1.15rem;margin:0 0 4px">Test cake.vn://</h2>
 <p style="color:#94a3b8;font-size:.8rem;margin:0 0 8px">Scheme thật từ RE dl.vietqr.io: <b>cake.vn://</b> (không phải cake://).</p>
@@ -55,7 +62,7 @@ li{background:#1e293b;border:1px solid #334155;border-radius:12px;padding:10px;m
 </div>
 <div class="card">
 <h1>Test mở trình duyệt ngoài</h1>
-<span class="ver">v7</span>
+<span class="ver">v8</span>
 <p style="color:#94a3b8;font-size:.85rem">Bấm lần lượt từng nút, ghi lại nút nào mở được Safari/trình duyệt ngoài. Không tự động chuyển hướng.</p>
 <details style="margin-top:12px"><summary style="cursor:pointer;font-weight:600">Test cake:// — v4</summary>
 <ol id="list4"></ol>
@@ -109,6 +116,26 @@ tests.forEach(function(t,i){
 });
 
 
+var CAKE_SCHEME="cake.vn://applink?targetPage=QRPay&source=App&qrContent=00020101021238630010A000000727013300069710250119PSS26259131000000070208QRIBFTTA530370454061200005802VN62230819MCRSskfyB%20com%20chien630446A8&callbackurl=ngo://start";
+var openLandingV8="./open.html";
+var l8=document.getElementById("list8");
+(function(){
+ // #37 direct scheme pill
+ var li1=document.createElement("li");
+ var a1=document.createElement("a");a1.className="pill-cake";a1.href=CAKE_SCHEME;
+ a1.innerHTML='<img src="./cake-logo.png" alt="Cake"/>37. Chuyển 120.000đ';
+ var st1=document.createElement("div");st1.className="st";
+ a1.addEventListener("click",function(){st1.textContent="đã bấm #37 ("+new Date().toLocaleTimeString()+")";});
+ var c1=document.createElement("div");c1.className="code";c1.textContent="<a href='cake.vn://applink?targetPage=QRPay…'>";
+ li1.appendChild(a1);li1.appendChild(c1);li1.appendChild(st1);l8.appendChild(li1);
+ // #38 landing
+ var li2=document.createElement("li");
+ var a2=document.createElement("a");a2.className="btn";a2.href=openLandingV8;a2.textContent="38. Mở qua open.html (landing)";
+ var st2=document.createElement("div");st2.className="st";
+ a2.addEventListener("click",function(){st2.textContent="đã bấm #38 ("+new Date().toLocaleTimeString()+")";});
+ var c2=document.createElement("div");c2.className="code";c2.textContent="<a href='./open.html'>";
+ li2.appendChild(a2);li2.appendChild(c2);li2.appendChild(st2);l8.appendChild(li2);
+})();
 var openLanding="./open.html?scheme="+encodeURIComponent("cake.vn://");
 var t7=[
  [34,"cake.vn:// (thẻ <a>)","cake.vn://"],
@@ -241,7 +268,7 @@ b29.addEventListener("click",function(){
   } else fallback();
   function fallback(){var ta=document.createElement("textarea");ta.value=url;document.body.appendChild(ta);ta.select();var ok=false;try{ok=document.execCommand("copy")}catch(e){}document.body.removeChild(ta);done(ok);}
 });
-document.getElementById("debug").innerHTML="<b>Version:</b> v7\n<b>User agent:</b> "+esc(ua)+"\n<b>Platform:</b> "+esc(navigator.platform||"")+"\n<b>In-app:</b> "+(inApp?"yes":"no")+"\n<b>URL:</b> "+esc(location.href)+"\n<b>Self link (#27):</b> "+esc(selfUrl);
+document.getElementById("debug").innerHTML="<b>Version:</b> v8\n<b>User agent:</b> "+esc(ua)+"\n<b>Platform:</b> "+esc(navigator.platform||"")+"\n<b>In-app:</b> "+(inApp?"yes":"no")+"\n<b>URL:</b> "+esc(location.href)+"\n<b>Self link (#27):</b> "+esc(selfUrl);
 })();
 </script>
 </body>
