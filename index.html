@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Test mở trình duyệt v10</title>
-<meta property="og:title" content="Test mở trình duyệt v10" />
+<title>Test mở trình duyệt v11</title>
+<meta property="og:title" content="Test mở trình duyệt v11" />
 <meta property="og:description" content="Thử từng cách mở trang trong trình duyệt ngoài." />
 <style>
 *{box-sizing:border-box}
@@ -63,7 +63,27 @@ li{background:#1e293b;border:1px solid #334155;border-radius:12px;padding:10px;m
 </div>
 <div class="card">
 <h1>Test mở trình duyệt ngoài</h1>
-<span class="ver">v10</span>
+<span class="ver">v11</span>
+<div class="card" id="v11"><h2>v11 qua Safari → trang trung gian</h2>
+<div style="margin-top:10px"><button class="btn" onclick="document.getElementById('s49').textContent='clicked #49 '+new Date().toLocaleTimeString();window.open('x-safari-https://phutran0301.github.io/iab-escape-test/open.html?auto=1','_blank')">49. window.open x-safari- (_blank)</button></div>
+<div class="code">window.open('x-safari-…open.html?auto=1','_blank') — mở Safari, trang trung gian tự hỏi 'Open in CAKE?'</div>
+<div class="st" id="s49"></div>
+<div style="margin-top:10px"><div class="btn"><a href='x-safari-https://phutran0301.github.io/iab-escape-test/open.html?auto=1' target='_blank' onclick="document.getElementById('s50').textContent='clicked #50 '+new Date().toLocaleTimeString();">50. &lt;a x-safari- target=_blank&gt;</a></div></div>
+<div class="code">thẻ &lt;a> x-safari- với target=_blank</div>
+<div class="st" id="s50"></div>
+<div style="margin-top:10px"><button class="btn" onclick="document.getElementById('s51').textContent='clicked #51 '+new Date().toLocaleTimeString();location.href='x-safari-https://phutran0301.github.io/iab-escape-test/open.html?auto=1'">51. location.href x-safari-</button></div>
+<div class="code">location.href = 'x-safari-…'</div>
+<div class="st" id="s51"></div>
+<div style="margin-top:10px"><button class="btn" onclick="document.getElementById('s52').textContent='clicked #52 '+new Date().toLocaleTimeString();window.open('googlechromes://phutran0301.github.io/iab-escape-test/open.html?auto=1','_blank')">52. Chrome (googlechromes://)</button></div>
+<div class="code">window.open('googlechromes://…','_blank') — cần cài Chrome</div>
+<div class="st" id="s52"></div>
+<div style="margin-top:10px"><div class="btn"><a href='x-safari-https://phutran0301.github.io/iab-escape-test/open.html?auto=1' onclick="document.getElementById('s53').textContent='clicked #53 '+new Date().toLocaleTimeString();">53. &lt;a x-safari-&gt; không target</a></div></div>
+<div class="code">thẻ &lt;a> x-safari- không có target</div>
+<div class="st" id="s53"></div>
+<div style="margin-top:10px"><button class="btn" onclick="navigator.clipboard.writeText('https://phutran0301.github.io/iab-escape-test/open.html?auto=1').then(function(){document.getElementById('s54').textContent='Đã sao chép! Dán vào Safari.'},function(){prompt('Sao chép link:','https://phutran0301.github.io/iab-escape-test/open.html?auto=1')})">54. Sao chép link trang trung gian</button></div>
+<div class="code">Sao chép rồi dán vào Safari: https://phutran0301.github.io/iab-escape-test/open.html?auto=1</div>
+<div class="st" id="s54"></div>
+</div>
 <div class="card" id="v10"><h2>v10 nháy đơn</h2>
 <div class="pill-cake" style="margin-top:10px"><a href='cake.vn://applink?targetPage=QRPay&source=App&qrContent=00020101021238630010A000000727013300069710250119PSS26259131000000070208QRIBFTTA530370454061200005802VN62230819MCRSskfyB%20com%20chien630446A8&callbackurl=ngo://start'><img src="./cake-logo.png" alt="Cake" style="width:24px;height:24px;border-radius:7px;vertical-align:middle"/> Chuyển 120.000đ</a></div>
 <div class="code">&lt;a href='cake.vn://applink?targetPage=QRPay&amp;source=App&amp;qrContent=00020101021238630010A000000727013300069710250119PSS26259131000000070208QRIBFTTA530370454061200005802VN62230819MCRSskfyB%20com%20chien630446A8&amp;callbackurl=ngo://start'>&lt;img src="./cake-logo.png" alt="Cake" style="width:24px;height:24px;border-radius:7px;vertical-align:middle"/> Chuyển 120.000đ&lt;/a></div>
@@ -291,7 +311,7 @@ b29.addEventListener("click",function(){
   } else fallback();
   function fallback(){var ta=document.createElement("textarea");ta.value=url;document.body.appendChild(ta);ta.select();var ok=false;try{ok=document.execCommand("copy")}catch(e){}document.body.removeChild(ta);done(ok);}
 });
-document.getElementById("debug").innerHTML="<b>Version:</b> v10\n<b>User agent:</b> "+esc(ua)+"\n<b>Platform:</b> "+esc(navigator.platform||"")+"\n<b>In-app:</b> "+(inApp?"yes":"no")+"\n<b>URL:</b> "+esc(location.href)+"\n<b>Self link (#27):</b> "+esc(selfUrl);
+document.getElementById("debug").innerHTML="<b>Version:</b> v11\n<b>User agent:</b> "+esc(ua)+"\n<b>Platform:</b> "+esc(navigator.platform||"")+"\n<b>In-app:</b> "+(inApp?"yes":"no")+"\n<b>URL:</b> "+esc(location.href)+"\n<b>Self link (#27):</b> "+esc(selfUrl);
 })();
 </script>
 </body>
