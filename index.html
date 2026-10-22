@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Test mở trình duyệt v5</title>
-<meta property="og:title" content="Test mở trình duyệt v5" />
+<title>Test mở trình duyệt v6</title>
+<meta property="og:title" content="Test mở trình duyệt v6" />
 <meta property="og:description" content="Thử từng cách mở trang trong trình duyệt ngoài." />
 <style>
 *{box-sizing:border-box}
@@ -31,6 +31,11 @@ li{background:#1e293b;border:1px solid #334155;border-radius:12px;padding:10px;m
 </style>
 </head>
 <body>
+<div class="card" style="margin-bottom:16px">
+<h2 style="font-size:1.15rem;margin:0 0 4px">VietQR deeplink → Cake</h2>
+<p style="color:#94a3b8;font-size:.8rem;margin:0 0 8px">Format: <code>https://dl.vietqr.io/pay?app=&lt;appId&gt;&amp;ba=&lt;stk&gt;@&lt;bank&gt;&amp;am=&amp;tn=</code> · nguồn <a href="https://www.vietqr.io/deeplink" style="color:#93c5fd">vietqr.io/deeplink</a>. Cake appId=<b>cake</b> (API ios/android-app-deeplinks). STK demo giả.</p>
+<ol id="list6"></ol>
+</div>
 <div id="banner">
   <h2 id="bannerTitle">Đang mở trong app…</h2>
   <a id="btn27" class="btn-big" href="#">27. Mở bằng trình duyệt</a>
@@ -43,7 +48,7 @@ li{background:#1e293b;border:1px solid #334155;border-radius:12px;padding:10px;m
 </div>
 <div class="card">
 <h1>Test mở trình duyệt ngoài</h1>
-<span class="ver">v5</span>
+<span class="ver">v6</span>
 <p style="color:#94a3b8;font-size:.85rem">Bấm lần lượt từng nút, ghi lại nút nào mở được Safari/trình duyệt ngoài. Không tự động chuyển hướng.</p>
 <details style="margin-top:12px"><summary style="cursor:pointer;font-weight:600">Test cake:// — v4</summary>
 <ol id="list4"></ol>
@@ -94,6 +99,25 @@ tests.forEach(function(t,i){
  li.appendChild(el);li.appendChild(code);li.appendChild(st);
  if(t.copy){var note=document.createElement("div");note.className="code";note.style.color="#e2e8f0";note.textContent="Bấm ⋯ góc trên → Mở trong trình duyệt";li.appendChild(note);}
  list.appendChild(li);
+});
+
+var VQ_PAY = "https://dl.vietqr.io/pay?app=cake&ba=0123456789@cake&am=10000&tn=test";
+var VQ_API = "https://dl.vietqr.io/pay?app=cake"; // field "deeplink" from api.vietqr.io — no custom scheme
+var t6=[
+ [30,"VietQR → Cake (có ba/am/tn)",VQ_PAY],
+ [31,"VietQR → Cake target=_blank",VQ_PAY,"_blank"],
+ [32,"Deeplink API trả về (app=cake)",VQ_API],
+ [33,"VietQR chỉ app=cake (không ba)",VQ_API]
+];
+var l6=document.getElementById("list6");
+t6.forEach(function(t){
+ var n=t[0],li=document.createElement("li");
+ var el=document.createElement("a");el.className="btn";el.href=t[2];el.textContent=n+". "+t[1];
+ if(t[3]){el.target=t[3];el.rel="noopener";}
+ var code=document.createElement("div");code.className="code";code.textContent=t[2];
+ var st=document.createElement("div");st.className="st";
+ el.addEventListener("click",function(){st.textContent="đã bấm #"+n+" ("+new Date().toLocaleTimeString()+")";});
+ li.appendChild(el);li.appendChild(code);li.appendChild(st);l6.appendChild(li);
 });
 var t4=[
  [21,"cake:// (thẻ <a>)","cake://"],
@@ -189,7 +213,7 @@ b29.addEventListener("click",function(){
   } else fallback();
   function fallback(){var ta=document.createElement("textarea");ta.value=url;document.body.appendChild(ta);ta.select();var ok=false;try{ok=document.execCommand("copy")}catch(e){}document.body.removeChild(ta);done(ok);}
 });
-document.getElementById("debug").innerHTML="<b>Version:</b> v5\n<b>User agent:</b> "+esc(ua)+"\n<b>Platform:</b> "+esc(navigator.platform||"")+"\n<b>In-app:</b> "+(inApp?"yes":"no")+"\n<b>URL:</b> "+esc(location.href)+"\n<b>Self link (#27):</b> "+esc(selfUrl);
+document.getElementById("debug").innerHTML="<b>Version:</b> v6\n<b>User agent:</b> "+esc(ua)+"\n<b>Platform:</b> "+esc(navigator.platform||"")+"\n<b>In-app:</b> "+(inApp?"yes":"no")+"\n<b>URL:</b> "+esc(location.href)+"\n<b>Self link (#27):</b> "+esc(selfUrl);
 })();
 </script>
 </body>
