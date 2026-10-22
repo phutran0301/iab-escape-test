@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Test mở trình duyệt v3</title>
-<meta property="og:title" content="Test mở trình duyệt v3" />
+<title>Test mở trình duyệt v4</title>
+<meta property="og:title" content="Test mở trình duyệt v4" />
 <meta property="og:description" content="Thử từng cách mở trang trong trình duyệt ngoài." />
 <style>
 *{box-sizing:border-box}
@@ -24,11 +24,14 @@ li{background:#1e293b;border:1px solid #334155;border-radius:12px;padding:10px;m
 <body>
 <div class="card">
 <h1>Test mở trình duyệt ngoài</h1>
-<span class="ver">v3</span>
+<span class="ver">v4</span>
 <p style="color:#94a3b8;font-size:.85rem">Bấm lần lượt từng nút, ghi lại nút nào mở được Safari/trình duyệt ngoài. Không tự động chuyển hướng.</p>
-<h2 style="font-size:1.1rem;margin:16px 0 4px">Mở app (test popup)</h2>
+<h2 style="font-size:1.1rem;margin:16px 0 4px">Test cake://</h2>
+<ol id="list4"></ol>
+<details style="margin-top:16px" open><summary style="cursor:pointer;font-weight:600">Mở app (test popup) — v3</summary>
 <ol id="list3"></ol>
-<details style="margin-top:16px"><summary style="cursor:pointer;font-weight:600">Các nút v2 (mở trình duyệt ngoài) — đã thử, không được</summary>
+</details>
+<details style="margin-top:12px"><summary style="cursor:pointer;font-weight:600">Các nút v2 (mở trình duyệt ngoài) — đã thử, không được</summary>
 <ol id="list"></ol>
 </details>
 </div>
@@ -71,6 +74,35 @@ tests.forEach(function(t,i){
  if(t.copy){var note=document.createElement("div");note.className="code";note.style.color="#e2e8f0";note.textContent="Bấm ⋯ góc trên → Mở trong trình duyệt";li.appendChild(note);}
  list.appendChild(li);
 });
+var t4=[
+ [21,"cake:// (thẻ <a>)","cake://"],
+ [22,"cake://home (thẻ <a>)","cake://home"],
+ [23,"JS location.href = 'cake://'",null,function(){location.href="cake://";}],
+ [24,"JS window.open('cake://','_blank')",null,function(){window.open("cake://","_blank");}],
+ [25,"hidden-iframe src='cake://'",null,function(){
+   var f=document.createElement("iframe");
+   f.style.cssText="position:absolute;width:0;height:0;border:0;visibility:hidden";
+   f.src="cake://";
+   document.body.appendChild(f);
+   setTimeout(function(){try{document.body.removeChild(f)}catch(e){}},2000);
+ }],
+ [26,"OneLink Cake by VPBank","https://cakevn.onelink.me/HHDV/6f739cbf"]
+];
+var l4=document.getElementById("list4");
+t4.forEach(function(t){
+ var n=t[0],li=document.createElement("li"),el;
+ if(t[2]){el=document.createElement("a");el.href=t[2];}else{el=document.createElement("button");}
+ el.className="btn";el.textContent=n+". "+t[1];
+ var code=document.createElement("div");code.className="code";
+ code.textContent=t[2]?("<a href='"+t[2]+"'>"):(n==23?"location.href = 'cake://'":n==24?"window.open('cake://','_blank')":"iframe.src = 'cake://'");
+ var st=document.createElement("div");st.className="st";
+ el.addEventListener("click",function(ev){
+  st.textContent="đã bấm #"+n+" ("+new Date().toLocaleTimeString()+")";
+  if(t[3]){ev.preventDefault();try{t[3]();}catch(e){st.textContent+=" — lỗi: "+e.message;}}
+ });
+ li.appendChild(el);li.appendChild(code);li.appendChild(st);l4.appendChild(li);
+});
+
 var t3=[
  [11,"Mở Zalo (zalo://)","zalo://"],
  [12,"Mở Shopee (shopee://)","shopee://"],
@@ -97,7 +129,7 @@ t3.forEach(function(t){
 var ua=navigator.userAgent||"";
 var inApp=/MessengerForiOS|Orca-Android|FB_IAB|FBAN|FBAV|FBIOS|FB4A|Instagram|Zalo| Line\//i.test(ua);
 var esc=function(s){return String(s).replace(/[&<>]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;"}[c]})};
-document.getElementById("debug").innerHTML="<b>Version:</b> v3\n<b>User agent:</b> "+esc(ua)+"\n<b>Platform:</b> "+esc(navigator.platform||"")+"\n<b>In-app:</b> "+(inApp?"yes":"no")+"\n<b>URL:</b> "+esc(location.href);
+document.getElementById("debug").innerHTML="<b>Version:</b> v4\n<b>User agent:</b> "+esc(ua)+"\n<b>Platform:</b> "+esc(navigator.platform||"")+"\n<b>In-app:</b> "+(inApp?"yes":"no")+"\n<b>URL:</b> "+esc(location.href);
 })();
 </script>
 </body>
