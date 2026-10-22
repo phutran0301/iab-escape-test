@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Test mở trình duyệt v4</title>
-<meta property="og:title" content="Test mở trình duyệt v4" />
+<title>Test mở trình duyệt v5</title>
+<meta property="og:title" content="Test mở trình duyệt v5" />
 <meta property="og:description" content="Thử từng cách mở trang trong trình duyệt ngoài." />
 <style>
 *{box-sizing:border-box}
@@ -19,22 +19,43 @@ li{background:#1e293b;border:1px solid #334155;border-radius:12px;padding:10px;m
 .st{font-size:.8rem;color:#facc15;margin-top:4px;min-height:1em}
 #debug{margin-top:16px;width:100%;max-width:440px;background:#1e293b;border:1px solid #334155;border-radius:10px;padding:12px;font-size:.72rem;color:#cbd5e1;word-break:break-all;white-space:pre-wrap}
 #debug b{color:#f8fafc}
+#banner{width:100%;max-width:440px;margin:0 0 16px;padding:16px;border-radius:14px;background:linear-gradient(135deg,#1d4ed8,#7c3aed);border:1px solid #6366f1;box-shadow:0 8px 24px rgba(0,0,0,.35)}
+#banner.out{background:#1e293b;border-color:#334155;box-shadow:none}
+#banner h2{margin:0 0 8px;font-size:1.15rem}
+#banner .hint{color:#c7d2fe;font-size:.85rem;margin:8px 0 0;line-height:1.4}
+#banner.out .hint{color:#94a3b8}
+.btn-big{display:block;width:100%;padding:18px;border:none;border-radius:12px;font-size:1.15rem;font-weight:800;background:#f8fafc;color:#1e3a8a;text-align:center;text-decoration:none;cursor:pointer;margin:8px 0}
+.btn-sec{background:#334155;color:#e2e8f0;font-size:1rem;font-weight:600;padding:14px}
+#toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%);background:#22c55e;color:#04210f;font-weight:700;padding:12px 18px;border-radius:999px;font-size:.9rem;box-shadow:0 8px 24px rgba(0,0,0,.4);opacity:0;pointer-events:none;transition:opacity .2s;z-index:99;max-width:90%;text-align:center}
+#toast.show{opacity:1}
 </style>
 </head>
 <body>
+<div id="banner">
+  <h2 id="bannerTitle">Đang mở trong app…</h2>
+  <a id="btn27" class="btn-big" href="#">27. Mở bằng trình duyệt</a>
+  <a id="btn28" class="btn btn-sec" href="#" target="_blank" rel="noopener">28. Mở link (target=_blank)</a>
+  <button id="btn29" type="button" class="btn btn-sec">29. Sao chép link</button>
+  <p class="hint">(Nếu không mở được: bấm ⋯ góc phải → Mở trong trình duyệt)</p>
+  <div id="st27" class="st"></div>
+  <div id="st28" class="st"></div>
+  <div id="st29" class="st"></div>
+</div>
 <div class="card">
 <h1>Test mở trình duyệt ngoài</h1>
-<span class="ver">v4</span>
+<span class="ver">v5</span>
 <p style="color:#94a3b8;font-size:.85rem">Bấm lần lượt từng nút, ghi lại nút nào mở được Safari/trình duyệt ngoài. Không tự động chuyển hướng.</p>
-<h2 style="font-size:1.1rem;margin:16px 0 4px">Test cake://</h2>
+<details style="margin-top:12px"><summary style="cursor:pointer;font-weight:600">Test cake:// — v4</summary>
 <ol id="list4"></ol>
-<details style="margin-top:16px" open><summary style="cursor:pointer;font-weight:600">Mở app (test popup) — v3</summary>
+</details>
+<details style="margin-top:12px"><summary style="cursor:pointer;font-weight:600">Mở app (test popup) — v3</summary>
 <ol id="list3"></ol>
 </details>
 <details style="margin-top:12px"><summary style="cursor:pointer;font-weight:600">Các nút v2 (mở trình duyệt ngoài) — đã thử, không được</summary>
 <ol id="list"></ol>
 </details>
 </div>
+<div id="toast"></div>
 <div id="debug"></div>
 <script>
 (function(){
@@ -129,7 +150,46 @@ t3.forEach(function(t){
 var ua=navigator.userAgent||"";
 var inApp=/MessengerForiOS|Orca-Android|FB_IAB|FBAN|FBAV|FBIOS|FB4A|Instagram|Zalo| Line\//i.test(ua);
 var esc=function(s){return String(s).replace(/[&<>]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;"}[c]})};
-document.getElementById("debug").innerHTML="<b>Version:</b> v4\n<b>User agent:</b> "+esc(ua)+"\n<b>Platform:</b> "+esc(navigator.platform||"")+"\n<b>In-app:</b> "+(inApp?"yes":"no")+"\n<b>URL:</b> "+esc(location.href);
+var selfUrl=(function(){
+  try{
+    var u=new URL(location.href);
+    u.searchParams.set("from","27");
+    return u.toString();
+  }catch(e){
+    var base=location.href.split("#")[0];
+    return base+(base.indexOf("?")>=0?"&":"?")+"from=27";
+  }
+})();
+var banner=document.getElementById("banner");
+var title=document.getElementById("bannerTitle");
+var b27=document.getElementById("btn27");
+var b28=document.getElementById("btn28");
+var b29=document.getElementById("btn29");
+b27.href=selfUrl;
+b28.href=selfUrl;
+if(inApp){
+  title.textContent="Bạn đang ở trình duyệt trong app";
+}else{
+  banner.classList.add("out");
+  title.textContent="Bạn đang ở trình duyệt thường";
+}
+function mark(id,n){document.getElementById(id).textContent="đã bấm #"+n+" ("+new Date().toLocaleTimeString()+")";}
+b27.addEventListener("click",function(){mark("st27",27);});
+b28.addEventListener("click",function(){mark("st28",28);});
+b29.addEventListener("click",function(){
+  mark("st29",29);
+  var url=location.href.split("#")[0];
+  function toast(msg){var t=document.getElementById("toast");t.textContent=msg;t.classList.add("show");setTimeout(function(){t.classList.remove("show")},2500);}
+  function done(ok){
+    if(ok) toast("Đã chép, dán vào Safari/Chrome");
+    else toast("Copy lỗi — link: "+url);
+  }
+  if(navigator.clipboard&&navigator.clipboard.writeText){
+    navigator.clipboard.writeText(url).then(function(){done(true)},function(){fallback()});
+  } else fallback();
+  function fallback(){var ta=document.createElement("textarea");ta.value=url;document.body.appendChild(ta);ta.select();var ok=false;try{ok=document.execCommand("copy")}catch(e){}document.body.removeChild(ta);done(ok);}
+});
+document.getElementById("debug").innerHTML="<b>Version:</b> v5\n<b>User agent:</b> "+esc(ua)+"\n<b>Platform:</b> "+esc(navigator.platform||"")+"\n<b>In-app:</b> "+(inApp?"yes":"no")+"\n<b>URL:</b> "+esc(location.href)+"\n<b>Self link (#27):</b> "+esc(selfUrl);
 })();
 </script>
 </body>
