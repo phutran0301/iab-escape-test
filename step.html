@@ -2,15 +2,16 @@
 .p.down,.p:active{transform:translateY(5px) scale(.97);box-shadow:0 1px 0 #a3134f,inset 0 4px 10px rgba(0,0,0,.35)}
 #toast{position:fixed;left:50%;bottom:40px;transform:translateX(-50%);background:#fff;color:#111;padding:12px 18px;border-radius:12px;font-weight:600;opacity:0;transition:opacity .25s;pointer-events:none;max-width:85%}
 #toast.on{opacity:1}</style></head><body>
-<p style="opacity:.6">v21 · bước 1</p><h2>Chuyển 120.000đ</h2>
+<p style="opacity:.6">v22 · bước 1</p><h2>Chuyển 120.000đ</h2>
 <p>Nhấn giữ nút bên dưới, chọn <b>“Mở liên kết”</b> để được chuyển sang CAKE</p>
-<a class="p" href='https://phutran0301.github.io/iab-escape-test/go.html?v=21'><img src="cake-logo.png">Tiếp tục</a>
-<a class="s" href='https://phutran0301.github.io/iab-escape-test/go.html?v=21&tap=1'>(So sánh: bấm thường)</a>
+<a class="p" href='https://phutran0301.github.io/iab-escape-test/go.html?v=22'><img src="cake-logo.png">Tiếp tục</a>
+<a class="s" href='https://phutran0301.github.io/iab-escape-test/go.html?v=22&tap=1'>(So sánh: bấm thường)</a>
 <div id="toast"></div><script>
 var IAB=/MessengerForiOS|Orca-Android|FBAN|FBAV|FBIOS|FB_IAB|FB4A/i.test(navigator.userAgent);
 var b=document.querySelector('a.p'),T=document.getElementById('toast'),tm;
 function toast(m){T.textContent=m;T.classList.add('on');clearTimeout(tm);tm=setTimeout(function(){T.classList.remove('on')},2500);}
 b.addEventListener('touchstart',function(){b.classList.add('down')},{passive:true});
 ['touchend','touchcancel'].forEach(function(e){b.addEventListener(e,function(){b.classList.remove('down')})});
+if(!IAB){b.setAttribute('href','cake.vn://applink?targetPage=QRPay&source=App&qrContent=00020101021238630010A000000727013300069710250119PSS26259131000000070208QRIBFTTA530370454061200005802VN62230819MCRSskfyB%20com%20chien630446A8&callbackurl=ngo://start');}
 if(IAB){b.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();toast('Hãy giữ nút để chuyển tiền');},true);}
 </script></body></html>
