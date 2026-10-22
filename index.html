@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Test mở trình duyệt v12</title>
-<meta property="og:title" content="Test mở trình duyệt v12" />
+<title>Test mở trình duyệt v13</title>
+<meta property="og:title" content="Test mở trình duyệt v13" />
 <meta property="og:description" content="Thử từng cách mở trang trong trình duyệt ngoài." />
 <style>
 *{box-sizing:border-box}
@@ -63,7 +63,29 @@ li{background:#1e293b;border:1px solid #334155;border-radius:12px;padding:10px;m
 </div>
 <div class="card">
 <h1>Test mở trình duyệt ngoài</h1>
-<span class="ver">v12</span>
+<span class="ver">v13</span>
+<div class="card" id="v13"><h2>VietQR autofill</h2>
+<div class="btn" style="margin-top:10px"><a href='https://dl.vietqr.io/pay?app=icb&ba=0123456789@ICB&am=10000&tn=test'>VietinBank iPay A</a></div>
+<div class="code">&lt;a href='https://dl.vietqr.io/pay?app=icb&amp;ba=0123456789@ICB&amp;am=10000&amp;tn=test'>VietinBank iPay A&lt;/a></div>
+<div class="btn" style="margin-top:10px"><a href='vietinbankipay://'>VietinBank iPay B</a></div>
+<div class="code">&lt;a href='vietinbankipay://'>VietinBank iPay B&lt;/a></div>
+<div class="btn" style="margin-top:10px"><a href='https://dl.vietqr.io/pay?app=bidv&ba=0123456789@BIDV&am=10000&tn=test'>BIDV SmartBanking A</a></div>
+<div class="code">&lt;a href='https://dl.vietqr.io/pay?app=bidv&amp;ba=0123456789@BIDV&amp;am=10000&amp;tn=test'>BIDV SmartBanking A&lt;/a></div>
+<div class="btn" style="margin-top:10px"><a href='bidv.smartbanking.partner://'>BIDV SmartBanking B</a></div>
+<div class="code">&lt;a href='bidv.smartbanking.partner://'>BIDV SmartBanking B&lt;/a></div>
+<div class="btn" style="margin-top:10px"><a href='https://dl.vietqr.io/pay?app=acb&ba=0123456789@ACB&am=10000&tn=test'>ACB ONE A</a></div>
+<div class="code">&lt;a href='https://dl.vietqr.io/pay?app=acb&amp;ba=0123456789@ACB&amp;am=10000&amp;tn=test'>ACB ONE A&lt;/a></div>
+<div class="btn" style="margin-top:10px"><a href='acbone://'>ACB ONE B</a></div>
+<div class="code">&lt;a href='acbone://'>ACB ONE B&lt;/a></div>
+<div class="btn" style="margin-top:10px"><a href='https://dl.vietqr.io/pay?app=ocb&ba=0123456789@OCB&am=10000&tn=test'>OCB OMNI A</a></div>
+<div class="code">&lt;a href='https://dl.vietqr.io/pay?app=ocb&amp;ba=0123456789@OCB&amp;am=10000&amp;tn=test'>OCB OMNI A&lt;/a></div>
+<div class="btn" style="margin-top:10px"><a href='newomni-app://'>OCB OMNI B</a></div>
+<div class="code">&lt;a href='newomni-app://'>OCB OMNI B&lt;/a></div>
+<div class="btn" style="margin-top:10px"><a href='https://dl.vietqr.io/pay?app=mb&ba=0123456789@MB&am=10000&tn=test'>MB Bank A</a></div>
+<div class="code">&lt;a href='https://dl.vietqr.io/pay?app=mb&amp;ba=0123456789@MB&amp;am=10000&amp;tn=test'>MB Bank A&lt;/a></div>
+<div class="btn" style="margin-top:10px"><a href='mbbank://'>MB Bank B</a></div>
+<div class="code">&lt;a href='mbbank://'>MB Bank B&lt;/a></div>
+</div>
 <div class="pill-cake" style="margin:10px 0"><a href='./open.html'>55. Trang trung gian kiểu VietQR</a></div>
 <div class="code">open.html (không auto): bấm nút hồng → QRPay, sau 1.5s nếu chưa rời trang → cake.vn://</div>
 <div class="card" id="v11"><h2>v11 qua Safari → trang trung gian</h2>
@@ -313,7 +335,7 @@ b29.addEventListener("click",function(){
   } else fallback();
   function fallback(){var ta=document.createElement("textarea");ta.value=url;document.body.appendChild(ta);ta.select();var ok=false;try{ok=document.execCommand("copy")}catch(e){}document.body.removeChild(ta);done(ok);}
 });
-document.getElementById("debug").innerHTML="<b>Version:</b> v12\n<b>User agent:</b> "+esc(ua)+"\n<b>Platform:</b> "+esc(navigator.platform||"")+"\n<b>In-app:</b> "+(inApp?"yes":"no")+"\n<b>URL:</b> "+esc(location.href)+"\n<b>Self link (#27):</b> "+esc(selfUrl);
+document.getElementById("debug").innerHTML="<b>Version:</b> v13\n<b>User agent:</b> "+esc(ua)+"\n<b>Platform:</b> "+esc(navigator.platform||"")+"\n<b>In-app:</b> "+(inApp?"yes":"no")+"\n<b>URL:</b> "+esc(location.href)+"\n<b>Self link (#27):</b> "+esc(selfUrl);
 })();
 </script>
 </body>
