@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Test mở trình duyệt v2</title>
-<meta property="og:title" content="Test mở trình duyệt v2" />
+<title>Test mở trình duyệt v3</title>
+<meta property="og:title" content="Test mở trình duyệt v3" />
 <meta property="og:description" content="Thử từng cách mở trang trong trình duyệt ngoài." />
 <style>
 *{box-sizing:border-box}
@@ -24,9 +24,13 @@ li{background:#1e293b;border:1px solid #334155;border-radius:12px;padding:10px;m
 <body>
 <div class="card">
 <h1>Test mở trình duyệt ngoài</h1>
-<span class="ver">v2</span>
+<span class="ver">v3</span>
 <p style="color:#94a3b8;font-size:.85rem">Bấm lần lượt từng nút, ghi lại nút nào mở được Safari/trình duyệt ngoài. Không tự động chuyển hướng.</p>
+<h2 style="font-size:1.1rem;margin:16px 0 4px">Mở app (test popup)</h2>
+<ol id="list3"></ol>
+<details style="margin-top:16px"><summary style="cursor:pointer;font-weight:600">Các nút v2 (mở trình duyệt ngoài) — đã thử, không được</summary>
 <ol id="list"></ol>
+</details>
 </div>
 <div id="debug"></div>
 <script>
@@ -67,10 +71,33 @@ tests.forEach(function(t,i){
  if(t.copy){var note=document.createElement("div");note.className="code";note.style.color="#e2e8f0";note.textContent="Bấm ⋯ góc trên → Mở trong trình duyệt";li.appendChild(note);}
  list.appendChild(li);
 });
+var t3=[
+ [11,"Mở Zalo (zalo://)","zalo://"],
+ [12,"Mở Shopee (shopee://)","shopee://"],
+ [13,"Mở YouTube (youtube://)","youtube://"],
+ [14,"Mở Instagram (instagram://app)","instagram://app"],
+ [15,"Universal link YouTube","https://www.youtube.com/watch?v=dQw4w9WgXcQ"],
+ [16,"Universal link Spotify","https://open.spotify.com/"],
+ [17,"Universal link Shopee","https://shopee.vn/"],
+ [18,"Universal link Zalo","https://zalo.me/"],
+ [19,"JS location.href = 'zalo://'",null,function(){location.href="zalo://";}],
+ ["20a","OneLink MoMo (onelink.momo.vn)","https://onelink.momo.vn/WZPv/wUJGeguQ"],
+ ["20b","OneLink Grab (grab.onelink.me)","https://grab.onelink.me/2695613898?pid=inappsharing&af_web_dp=https%3A%2F%2Fwww.grab.com%2Fdownload"]
+];
+var l3=document.getElementById("list3");
+t3.forEach(function(t){
+ var n=t[0],li=document.createElement("li"),el;
+ if(t[2]){el=document.createElement("a");el.href=t[2];}else{el=document.createElement("button");}
+ el.className="btn";el.textContent=n+". "+t[1];
+ var code=document.createElement("div");code.className="code";code.textContent=t[2]?"<a href='"+t[2]+"'>":"location.href = 'zalo://'";
+ var st=document.createElement("div");st.className="st";
+ el.addEventListener("click",function(){st.textContent="đã bấm #"+n+" ("+new Date().toLocaleTimeString()+")";if(t[3]){try{t[3]();}catch(e){st.textContent+=" — lỗi: "+e.message;}}});
+ li.appendChild(el);li.appendChild(code);li.appendChild(st);l3.appendChild(li);
+});
 var ua=navigator.userAgent||"";
 var inApp=/MessengerForiOS|Orca-Android|FB_IAB|FBAN|FBAV|FBIOS|FB4A|Instagram|Zalo| Line\//i.test(ua);
 var esc=function(s){return String(s).replace(/[&<>]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;"}[c]})};
-document.getElementById("debug").innerHTML="<b>Version:</b> v2\n<b>User agent:</b> "+esc(ua)+"\n<b>Platform:</b> "+esc(navigator.platform||"")+"\n<b>In-app:</b> "+(inApp?"yes":"no")+"\n<b>URL:</b> "+esc(location.href);
+document.getElementById("debug").innerHTML="<b>Version:</b> v3\n<b>User agent:</b> "+esc(ua)+"\n<b>Platform:</b> "+esc(navigator.platform||"")+"\n<b>In-app:</b> "+(inApp?"yes":"no")+"\n<b>URL:</b> "+esc(location.href);
 })();
 </script>
 </body>
