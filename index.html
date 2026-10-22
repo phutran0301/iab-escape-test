@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Test mở trình duyệt v8</title>
-<meta property="og:title" content="Test mở trình duyệt v8" />
+<title>Test mở trình duyệt v9</title>
+<meta property="og:title" content="Test mở trình duyệt v9" />
 <meta property="og:description" content="Thử từng cách mở trang trong trình duyệt ngoài." />
 <style>
 *{box-sizing:border-box}
@@ -62,7 +62,15 @@ li{background:#1e293b;border:1px solid #334155;border-radius:12px;padding:10px;m
 </div>
 <div class="card">
 <h1>Test mở trình duyệt ngoài</h1>
-<span class="ver">v8</span>
+<span class="ver">v9</span>
+<div class="card" id="v9"><h2>v9 so sánh link</h2>
+<p><a class="pill-cake" href="cake.vn://applink?targetPage=QRPay&amp;source=App&amp;qrContent=00020101021238630010A000000727013300069710250119PSS26259131000000070208QRIBFTTA530370454061200005802VN62230819MCRSskfyB%20com%20chien630446A8&amp;callbackurl=ngo://start" onclick="document.getElementById('c39').textContent='clicked #39 '+new Date().toLocaleTimeString()"><img src="./cake-logo.png" alt="Cake"/>39. Chuyển 120.000đ</a><br><code style="word-break:break-all;font-size:11px">cake.vn://applink?targetPage=QRPay&amp;source=App&amp;qrContent=00020101021238630010A000000727013300069710250119PSS26259131000000070208QRIBFTTA530370454061200005802VN62230819MCRSskfyB%20com%20chien630446A8&amp;callbackurl=ngo://start</code><br><small id="c39"></small></p>
+<p><a class="btn" href="cake.vn://applink?targetPage=QRPay&amp;source=App&amp;qrContent=00020101021238630010A000000727013300069710250119PSS26259131000000070208QRIBFTTA530370454061200005802VN62230819MCRSskfyB%20com%20chien630446A8&amp;callbackurl=ngo%3A%2F%2Fstart" onclick="document.getElementById('c40').textContent='clicked #40 '+new Date().toLocaleTimeString()">40. Mở link #40</a><br><code style="word-break:break-all;font-size:11px">cake.vn://applink?targetPage=QRPay&amp;source=App&amp;qrContent=00020101021238630010A000000727013300069710250119PSS26259131000000070208QRIBFTTA530370454061200005802VN62230819MCRSskfyB%20com%20chien630446A8&amp;callbackurl=ngo%3A%2F%2Fstart</code><br><small id="c40"></small></p>
+<p><a class="btn" href="cake.vn://applink?targetPage=QRPay&amp;source=App&amp;qrContent=00020101021238630010A000000727013300069710250119PSS26259131000000070208QRIBFTTA530370454061200005802VN62230819MCRSskfyB%20com%20chien630446A8" onclick="document.getElementById('c41').textContent='clicked #41 '+new Date().toLocaleTimeString()">41. Mở link #41</a><br><code style="word-break:break-all;font-size:11px">cake.vn://applink?targetPage=QRPay&amp;source=App&amp;qrContent=00020101021238630010A000000727013300069710250119PSS26259131000000070208QRIBFTTA530370454061200005802VN62230819MCRSskfyB%20com%20chien630446A8</code><br><small id="c41"></small></p>
+<p><a class="btn" href="cake.vn://applink?targetPage=QRPay" onclick="document.getElementById('c42').textContent='clicked #42 '+new Date().toLocaleTimeString()">42. Mở link #42</a><br><code style="word-break:break-all;font-size:11px">cake.vn://applink?targetPage=QRPay</code><br><small id="c42"></small></p>
+<p><a class="btn" href="cake.vn://applink" onclick="document.getElementById('c43').textContent='clicked #43 '+new Date().toLocaleTimeString()">43. Mở link #43</a><br><code style="word-break:break-all;font-size:11px">cake.vn://applink</code><br><small id="c43"></small></p>
+<p><a class="btn" href="cake.vn://applink?targetPage=QRPay&amp;source=App&amp;qrContent=00020101021238630010A000000727013300069710250119PSS26259131000000070208QRIBFTTA530370454061200005802VN62230819MCRSskfyB%20com%20chien630446A8" onclick="document.getElementById('c44').textContent='clicked #44 '+new Date().toLocaleTimeString()">44. Mở link #44</a><br><code style="word-break:break-all;font-size:11px">cake.vn://applink?targetPage=QRPay&amp;source=App&amp;qrContent=00020101021238630010A000000727013300069710250119PSS26259131000000070208QRIBFTTA530370454061200005802VN62230819MCRSskfyB%20com%20chien630446A8</code><br><small id="c44"></small></p>
+</div>
 <p style="color:#94a3b8;font-size:.85rem">Bấm lần lượt từng nút, ghi lại nút nào mở được Safari/trình duyệt ngoài. Không tự động chuyển hướng.</p>
 <details style="margin-top:12px"><summary style="cursor:pointer;font-weight:600">Test cake:// — v4</summary>
 <ol id="list4"></ol>
@@ -268,7 +276,7 @@ b29.addEventListener("click",function(){
   } else fallback();
   function fallback(){var ta=document.createElement("textarea");ta.value=url;document.body.appendChild(ta);ta.select();var ok=false;try{ok=document.execCommand("copy")}catch(e){}document.body.removeChild(ta);done(ok);}
 });
-document.getElementById("debug").innerHTML="<b>Version:</b> v8\n<b>User agent:</b> "+esc(ua)+"\n<b>Platform:</b> "+esc(navigator.platform||"")+"\n<b>In-app:</b> "+(inApp?"yes":"no")+"\n<b>URL:</b> "+esc(location.href)+"\n<b>Self link (#27):</b> "+esc(selfUrl);
+document.getElementById("debug").innerHTML="<b>Version:</b> v9\n<b>User agent:</b> "+esc(ua)+"\n<b>Platform:</b> "+esc(navigator.platform||"")+"\n<b>In-app:</b> "+(inApp?"yes":"no")+"\n<b>URL:</b> "+esc(location.href)+"\n<b>Self link (#27):</b> "+esc(selfUrl);
 })();
 </script>
 </body>
