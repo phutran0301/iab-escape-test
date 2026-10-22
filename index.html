@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Test mở trình duyệt v6</title>
-<meta property="og:title" content="Test mở trình duyệt v6" />
+<title>Test mở trình duyệt v7</title>
+<meta property="og:title" content="Test mở trình duyệt v7" />
 <meta property="og:description" content="Thử từng cách mở trang trong trình duyệt ngoài." />
 <style>
 *{box-sizing:border-box}
@@ -32,10 +32,17 @@ li{background:#1e293b;border:1px solid #334155;border-radius:12px;padding:10px;m
 </head>
 <body>
 <div class="card" style="margin-bottom:16px">
+<h2 style="font-size:1.15rem;margin:0 0 4px">Test cake.vn://</h2>
+<p style="color:#94a3b8;font-size:.8rem;margin:0 0 8px">Scheme thật từ RE dl.vietqr.io: <b>cake.vn://</b> (không phải cake://).</p>
+<ol id="list7"></ol>
+</div>
+<details style="margin-bottom:16px;max-width:440px;width:100%"><summary style="cursor:pointer;font-weight:600">VietQR deeplink → Cake — v6</summary>
+<div class="card" style="margin-top:8px">
 <h2 style="font-size:1.15rem;margin:0 0 4px">VietQR deeplink → Cake</h2>
 <p style="color:#94a3b8;font-size:.8rem;margin:0 0 8px">Format: <code>https://dl.vietqr.io/pay?app=&lt;appId&gt;&amp;ba=&lt;stk&gt;@&lt;bank&gt;&amp;am=&amp;tn=</code> · nguồn <a href="https://www.vietqr.io/deeplink" style="color:#93c5fd">vietqr.io/deeplink</a>. Cake appId=<b>cake</b> (API ios/android-app-deeplinks). STK demo giả.</p>
 <ol id="list6"></ol>
 </div>
+</details>
 <div id="banner">
   <h2 id="bannerTitle">Đang mở trong app…</h2>
   <a id="btn27" class="btn-big" href="#">27. Mở bằng trình duyệt</a>
@@ -48,7 +55,7 @@ li{background:#1e293b;border:1px solid #334155;border-radius:12px;padding:10px;m
 </div>
 <div class="card">
 <h1>Test mở trình duyệt ngoài</h1>
-<span class="ver">v6</span>
+<span class="ver">v7</span>
 <p style="color:#94a3b8;font-size:.85rem">Bấm lần lượt từng nút, ghi lại nút nào mở được Safari/trình duyệt ngoài. Không tự động chuyển hướng.</p>
 <details style="margin-top:12px"><summary style="cursor:pointer;font-weight:600">Test cake:// — v4</summary>
 <ol id="list4"></ol>
@@ -101,6 +108,27 @@ tests.forEach(function(t,i){
  list.appendChild(li);
 });
 
+
+var openLanding="./open.html?scheme="+encodeURIComponent("cake.vn://");
+var t7=[
+ [34,"cake.vn:// (thẻ <a>)","cake.vn://"],
+ [35,"JS location.href = 'cake.vn://'",null,function(){location.href="cake.vn://";}],
+ [36,"Landing open.html?scheme=cake.vn://",openLanding]
+];
+var l7=document.getElementById("list7");
+t7.forEach(function(t){
+ var n=t[0],li=document.createElement("li"),el;
+ if(t[2]){el=document.createElement("a");el.href=t[2];}else{el=document.createElement("button");}
+ el.className="btn";el.textContent=n+". "+t[1];
+ var code=document.createElement("div");code.className="code";
+ code.textContent=t[2]?(t[2].indexOf("open.html")>=0?"<a href='"+t[2]+"'>" :"<a href='cake.vn://'>"):"location.href = 'cake.vn://'";
+ var st=document.createElement("div");st.className="st";
+ el.addEventListener("click",function(ev){
+  st.textContent="đã bấm #"+n+" ("+new Date().toLocaleTimeString()+")";
+  if(t[3]){ev.preventDefault();try{t[3]();}catch(e){st.textContent+=" — lỗi: "+e.message;}}
+ });
+ li.appendChild(el);li.appendChild(code);li.appendChild(st);l7.appendChild(li);
+});
 var VQ_PAY = "https://dl.vietqr.io/pay?app=cake&ba=0123456789@cake&am=10000&tn=test";
 var VQ_API = "https://dl.vietqr.io/pay?app=cake"; // field "deeplink" from api.vietqr.io — no custom scheme
 var t6=[
@@ -213,7 +241,7 @@ b29.addEventListener("click",function(){
   } else fallback();
   function fallback(){var ta=document.createElement("textarea");ta.value=url;document.body.appendChild(ta);ta.select();var ok=false;try{ok=document.execCommand("copy")}catch(e){}document.body.removeChild(ta);done(ok);}
 });
-document.getElementById("debug").innerHTML="<b>Version:</b> v6\n<b>User agent:</b> "+esc(ua)+"\n<b>Platform:</b> "+esc(navigator.platform||"")+"\n<b>In-app:</b> "+(inApp?"yes":"no")+"\n<b>URL:</b> "+esc(location.href)+"\n<b>Self link (#27):</b> "+esc(selfUrl);
+document.getElementById("debug").innerHTML="<b>Version:</b> v7\n<b>User agent:</b> "+esc(ua)+"\n<b>Platform:</b> "+esc(navigator.platform||"")+"\n<b>In-app:</b> "+(inApp?"yes":"no")+"\n<b>URL:</b> "+esc(location.href)+"\n<b>Self link (#27):</b> "+esc(selfUrl);
 })();
 </script>
 </body>
